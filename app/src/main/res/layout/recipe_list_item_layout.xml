@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginBottom="@dimen/margin_text_small"
-                    android:text="Adriana's Recipe"
+                    android:text="Sample Recipe"
                     android:textColor="@color/text_color_primary"
                     android:textSize="@dimen/text_list_medium"
                     android:textStyle="bold" />
