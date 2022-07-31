@@ -9,6 +9,7 @@ import com.example.project1.R
 import com.example.project1.UpdateRecipe
 import com.example.project1.model.Recipe
 import com.example.project1.viewmodel.MainViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class RecipePage : AppCompatActivity() {
@@ -21,7 +22,6 @@ class RecipePage : AppCompatActivity() {
         vm = MainViewModel(application)
 
         //populate TextFields with recipe data from repo and get recipeID as a String
-        //var recipe: Recipe = getData(repo)
         val recipe: Recipe = intent.getParcelableExtra<Recipe>("recipe")!!
         setData(recipe)
 
@@ -41,30 +41,23 @@ class RecipePage : AppCompatActivity() {
 
         val btnDelete: ExtendedFloatingActionButton = findViewById(R.id.btn_delete)
         btnDelete.setOnClickListener {
-//          setOnClickListener  val builder = AlertDialog.Builder(this)
-//            // Set Alert Title
-//            builder.setTitle("Are you sure you want to delete recipe?")
-//            // Set the message show for the Alert time
-//            builder.setMessage("Hitting OK will delete the recipe")
-//            builder.setCancelable(true)
-//            builder.setNegativeButton("Cancel", DialogInterface.OnClickListener()
-//            { dialog, which -> dialog.cancel() })
-
-//            builder.setPositiveButton(
-//                "OK",DialogInterface.OnClickListener() {
-//
-//             )).show()
-//
-
-            vm.deleteRecipe(recipe)
-
-            val intent = Intent(this, FavoritesList::class.java)
-            startActivity(intent)
-
-            val message = "recipe deleted"
-            val duration = Toast.LENGTH_LONG
-            val toast = Toast.makeText(applicationContext, message, duration)
-            toast.show()
+            MaterialAlertDialogBuilder(this)
+                .setTitle("Alert")
+                .setMessage("This will permanently delete ${recipe.title}. Do you want to continue?")
+                .setPositiveButton("Cancel") { _, _ ->
+                    val message = "cancelled"
+                    val duration = Toast.LENGTH_LONG
+                    Toast.makeText(applicationContext, message, duration).show()
+                }
+                .setNegativeButton("Delete") { _, _ ->
+                    vm.deleteRecipe(recipe)
+                    val intent = Intent(this, FavoritesList::class.java)
+                    startActivity(intent)
+                    val message = "recipe deleted"
+                    val duration = Toast.LENGTH_LONG
+                    Toast.makeText(applicationContext, message, duration).show()
+                }
+                .show()
         }
     }
 
