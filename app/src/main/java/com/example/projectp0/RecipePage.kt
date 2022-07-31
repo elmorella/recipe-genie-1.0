@@ -14,27 +14,23 @@ class RecipePage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_page)
 
-        val repo: RecipeRepository by lazy {
-            RecipeRepository(this)
-        }
         vm = MainViewModel(application)
 
         //populate TextFields with recipe data from repo and get recipeID as a String
         //var recipe: Recipe = getData(repo)
-        var recipe: Recipe = intent.getParcelableExtra<Recipe>("recipe")!!
+        val recipe: Recipe = intent.getParcelableExtra<Recipe>("recipe")!!
         setData(recipe)
-
 
         val btnHome: ExtendedFloatingActionButton = findViewById(R.id.btn_home)
         btnHome.setOnClickListener {
-            val intent: Intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
         val btnEdit: ExtendedFloatingActionButton = findViewById(R.id.btn_edit)
         btnEdit.setOnClickListener {
-            val intent: Intent = Intent(this, UpdateRecipe::class.java)
-            intent.putExtra("title", recipe.title)
+            val intent = Intent(this, UpdateRecipe::class.java)
+            intent.putExtra("recipe", recipe)
             startActivity(intent)
         }
 

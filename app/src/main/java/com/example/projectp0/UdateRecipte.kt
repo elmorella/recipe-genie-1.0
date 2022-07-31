@@ -24,9 +24,10 @@ class UpdateRecipe : AppCompatActivity() {
         setContentView(R.layout.activity_update_recipe)
 
         vm = MainViewModel(application)
+        val recipe = intent.getParcelableExtra<Recipe>("recipe")!!
 
         // unwrap Intent
-        getData()
+        getData(recipe)
 
         val btnUpdate: ExtendedFloatingActionButton = findViewById(R.id.btn_update)
         val btnCancel: ExtendedFloatingActionButton = findViewById(R.id.btn_cancel)
@@ -43,12 +44,12 @@ class UpdateRecipe : AppCompatActivity() {
 
 
         btnUpdate.setOnClickListener {
-            var recipe = Recipe(
+            val newRecipe = Recipe(
                 id.text.toString().toInt(), title.text.toString(),
                 rYield.text.toString(), prepTime.text.toString(), totalTime.text.toString(),
                 ingredients.text.toString(), directions.text.toString()
             )
-            vm.updateRecipe(recipe)
+            vm.updateRecipe(newRecipe)
 
             val message = "recipe updated"
             val duration = Toast.LENGTH_LONG
@@ -60,10 +61,7 @@ class UpdateRecipe : AppCompatActivity() {
         }
     }
 
-    private fun getData() {
-        val repo: RecipeRepository by lazy {
-            RecipeRepository(this)
-        }
+    private fun getData(recipe: Recipe) {
         // Map TextViews in recipe page
         id = findViewById(R.id.text_view_id)
         title = findViewById(R.id.edit_text_title)
@@ -73,17 +71,13 @@ class UpdateRecipe : AppCompatActivity() {
         ingredients = findViewById(R.id.edit_text_ingredients)
         directions = findViewById(R.id.edit_text_directions)
 
-        // Get recipe from repo with title
-        val recipe: List<Recipe> =
-            repo.findRecipeWithTitle(intent.getStringExtra("title").toString())
-
         // Populate Text Views with recipe fields
-        id.text = recipe[0].recipeId.toString()
-        title.setText(recipe[0].title)
-        rYield.setText(recipe[0].rYield)
-        prepTime.setText(recipe[0].prepTime)
-        totalTime.setText(recipe[0].totalTime)
-        ingredients.setText(recipe[0].ingredients)
-        directions.setText(recipe[0].directions)
+        id.text = recipe.recipeId.toString()
+        title.setText(recipe.title)
+        rYield.setText(recipe.rYield)
+        prepTime.setText(recipe.prepTime)
+        totalTime.setText(recipe.totalTime)
+        ingredients.setText(recipe.ingredients)
+        directions.setText(recipe.directions)
     }
 }
