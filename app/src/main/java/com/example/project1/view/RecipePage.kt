@@ -1,10 +1,14 @@
-package com.example.project1
+package com.example.project1.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.project1.R
+import com.example.project1.UpdateRecipe
+import com.example.project1.model.Recipe
+import com.example.project1.viewmodel.MainViewModel
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class RecipePage : AppCompatActivity() {

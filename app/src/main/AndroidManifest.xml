@@ -15,16 +15,16 @@
             android:name="com.example.project1.UpdateRecipe"
             android:exported="false" />
         <activity
-            android:name="com.example.project1.RecipePage"
+            android:name="com.example.project1.view.RecipePage"
             android:exported="false" />
         <activity
-            android:name="com.example.project1.NewRecipeForm"
+            android:name="com.example.project1.view.NewRecipeForm"
             android:exported="false" />
         <activity
-            android:name="com.example.project1.FavoritesList"
+            android:name="com.example.project1.view.FavoritesList"
             android:exported="false" />
         <activity
-            android:name="com.example.project1.MainActivity"
+            android:name="com.example.project1.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

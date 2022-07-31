@@ -1,10 +1,12 @@
-package com.example.project1
+package com.example.project1.viewmodel
 
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.project1.model.Recipe
+import com.example.project1.repository.RecipeRepository
 import kotlinx.coroutines.launch
 
 class MainViewModel(app: Application): AndroidViewModel(app) {

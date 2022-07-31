@@ -1,10 +1,13 @@
-package com.example.project1
+package com.example.project1.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import com.example.project1.database.AppDatabase
+import com.example.project1.database.RecipeDao
+import com.example.project1.model.Recipe
 
 class RecipeRepository (context: Context){
-    var db:RecipeDao? = AppDatabase.getInstance(context)?.recipeDao()
+    var db: RecipeDao? = AppDatabase.getInstance(context)?.recipeDao()
 
     fun getAllRecipes(): LiveData<List<Recipe>>? {
         return db?.selectRecipe()
@@ -21,20 +24,4 @@ class RecipeRepository (context: Context){
     fun deleteRecipe(recipe: Recipe) {
         db?.deleteRecipe(recipe)
     }
-
-    fun deleteAll(){
-        db?.deleteAll()
-    }
-
-    fun findRecipeWithId(search: String): List<Recipe> {
-
-        return db?.findRecipeWithId(search)!!
-    }
-
-    fun findRecipeWithTitle(search: String): List<Recipe> {
-
-        return db?.findRecipeWithTitle(search)!!
-    }
-
-    // insert things in an Async way
 }

@@ -1,10 +1,11 @@
-package com.example.project1
+package com.example.project1.database
 
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.project1.model.Recipe
 
 @Database(entities = [Recipe::class], version = 2, exportSchema = false)
 

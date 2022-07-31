@@ -1,10 +1,12 @@
-package com.example.project1
+package com.example.project1.viewmodel
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.project1.R
+import com.example.project1.model.Recipe
 
 class RecipeAdapter (private val onCardClick: (position: Int) -> Unit,
                     private val studentList: List<Recipe>)

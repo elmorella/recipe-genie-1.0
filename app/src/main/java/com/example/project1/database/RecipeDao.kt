@@ -1,7 +1,8 @@
-package com.example.project1
+package com.example.project1.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.project1.model.Recipe
 
 @Dao
 interface RecipeDao {
