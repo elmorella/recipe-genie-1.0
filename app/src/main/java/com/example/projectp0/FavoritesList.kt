@@ -18,12 +18,12 @@ class FavoritesList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorites_list)
 
-        mainViewModel = MainViewModel((application))
+        mainViewModel = MainViewModel(application)
         mainViewModel.allRecipes?.observe(this) { recipeList ->
             getRecipes(recipeList)
         }
 
-        var recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -43,7 +43,7 @@ class FavoritesList : AppCompatActivity() {
 
     private fun onCardClick(position: Int) {
         val myIntent = Intent(this, RecipePage::class.java)
-        myIntent.putExtra("title", recipeList[position].title)
+        myIntent.putExtra("recipe", recipeList[position])
         startActivity(myIntent)
     }
 

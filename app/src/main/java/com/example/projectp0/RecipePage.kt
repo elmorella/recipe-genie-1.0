@@ -20,7 +20,10 @@ class RecipePage : AppCompatActivity() {
         vm = MainViewModel(application)
 
         //populate TextFields with recipe data from repo and get recipeID as a String
-        var recipe: Recipe = getData(repo)
+        //var recipe: Recipe = getData(repo)
+        var recipe: Recipe = intent.getParcelableExtra<Recipe>("recipe")!!
+        setData(recipe)
+
 
         val btnHome: ExtendedFloatingActionButton = findViewById(R.id.btn_home)
         btnHome.setOnClickListener {
@@ -65,33 +68,23 @@ class RecipePage : AppCompatActivity() {
         }
     }
 
-    private fun getData(repo: RecipeRepository): Recipe {
+    private fun setData(recipe: Recipe) {
         // Map TextViews in recipe page
-        var id: TextView = findViewById(R.id.id)
-        var title: TextView = findViewById(R.id.title)
-        var rYield: TextView = findViewById(R.id.r_yield)
-        var prepTime: TextView = findViewById(R.id.prep_time)
-        var totalTime: TextView = findViewById(R.id.total_time)
-        var ingredients: TextView = findViewById(R.id.ingredients)
-        var directions: TextView = findViewById(R.id.directions)
-
-        // Get recipe from repo with ID
-        var recipe: List<Recipe> =
-            repo.findRecipeWithTitle(intent.getStringExtra("title").toString())
+        val id: TextView = findViewById(R.id.id)
+        val title: TextView = findViewById(R.id.title)
+        val rYield: TextView = findViewById(R.id.r_yield)
+        val prepTime: TextView = findViewById(R.id.prep_time)
+        val totalTime: TextView = findViewById(R.id.total_time)
+        val ingredients: TextView = findViewById(R.id.ingredients)
+        val directions: TextView = findViewById(R.id.directions)
 
         // Populate Text Views with recipe fields
-        id.text = recipe[0].recipeId.toString()
-        title.text = recipe[0].title
-        rYield.text = recipe[0].rYield
-        prepTime.text = recipe[0].prepTime
-        totalTime.text = recipe[0].totalTime
-        ingredients.text = recipe[0].ingredients
-        directions.text = recipe[0].directions
-
-        return Recipe(
-            id.text.toString().toInt(), title.text.toString(), rYield.text.toString(),
-            prepTime.text.toString(), totalTime.text.toString(), ingredients.text.toString(),
-            directions.text.toString()
-        )
+        id.text = recipe.recipeId.toString()
+        title.text = recipe.title
+        rYield.text = recipe.rYield
+        prepTime.text = recipe.prepTime
+        totalTime.text = recipe.totalTime
+        ingredients.text = recipe.ingredients
+        directions.text = recipe.directions
     }
 }
