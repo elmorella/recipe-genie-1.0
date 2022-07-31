@@ -1,9 +1,8 @@
-package com.example.projectp0
+package com.example.project1
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,12 +17,12 @@ class FavoritesList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorites_list)
 
-        mainViewModel = MainViewModel((application))
+        mainViewModel = MainViewModel(application)
         mainViewModel.allRecipes?.observe(this) { recipeList ->
             getRecipes(recipeList)
         }
 
-        var recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -43,7 +42,7 @@ class FavoritesList : AppCompatActivity() {
 
     private fun onCardClick(position: Int) {
         val myIntent = Intent(this, RecipePage::class.java)
-        myIntent.putExtra("title", recipeList[position].title)
+        myIntent.putExtra("recipe", recipeList[position])
         startActivity(myIntent)
     }
 
